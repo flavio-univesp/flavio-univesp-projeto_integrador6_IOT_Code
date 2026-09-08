@@ -11,7 +11,7 @@
 
 <h3 align="center">📌 Projeto Integrador em Computação VI - 2026</h3>
 
-<p align="center"><strong>Polo:</strong> DRP04 - Trocar pelo nome dos polos</p>
+<p align="center"><strong>Polo:</strong> Araras, Campinas, Elias Fausto, Estiva Gerbi, Indaiatuba, Leme, Várzea Paulista</p>
 <p align="center"><strong>Orientadora do PI:</strong> Aline Santana</p>
 
 ---
