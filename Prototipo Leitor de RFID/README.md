@@ -143,7 +143,7 @@ O modo paralelo 4-bit envia cada byte em dois nibbles pelos pinos D4–D7. Isso 
 - Core `esp32:esp32@3.3.11`;
 - Biblioteca `MFRC522` 1.4.x;
 - Biblioteca `LiquidCrystal`;
-- Carregue o arquivo esp32_portaria_lcd.ino no dispositivo montado, através do Arduino IDE.
+- Carregue o arquivo [`esp32_portaria_lcd.ino`](esp32_portaria_lcd.ino) no dispositivo montado, através do Arduino IDE.
 
 </details>
 
