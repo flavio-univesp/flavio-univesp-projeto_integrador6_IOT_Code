@@ -136,11 +136,12 @@ Este é o layout capturado para simulação Wokwi. Em hardware real o microSD é
 
 ✅ **Configurar o firmware:**
 
-1. Abra o arquivo [`esp32_wrover_wifi.ino`](esp32_wrover_wifi.ino).
+1. Abra o arquivo [`esp32_portaria_wifi.ino`](esp32_portaria_wifi.ino).
 2. Informe o SSID e a senha da rede Wi-Fi nos campos de configuração.
 3. Configure a URL e a SAS de leitura do arquivo de TAGs no Azure Storage.
 4. Informe o hostname, o identificador e a chave do dispositivo cadastrado no Azure IoT Hub.
-5. Não publique as credenciais reais em repositórios ou documentos.
+5. Faça o upload do arquivo no ESP32.
+6. Não publique as credenciais reais em repositórios ou documentos.
 
 </details>
 
