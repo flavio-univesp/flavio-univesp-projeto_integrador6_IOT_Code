@@ -1,7 +1,7 @@
 
 <p align="center"> <i>Desenvolvido com dedicação pelo grupo <strong>CondoAcessos</strong> — Projeto Integrador em Computação VI (UNIVESP, 2026)</i> </p> </div>
 
-
+---
 
 
 
