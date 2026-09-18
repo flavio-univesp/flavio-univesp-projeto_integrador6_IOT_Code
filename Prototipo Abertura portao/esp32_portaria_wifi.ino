@@ -27,7 +27,7 @@
 // Wi-Fi
 // ============================================================
 static const char* WIFI_SSID     = "Entre com o SSID";
-static const char* WIFI_PASSWORD = "insira_a_senha_aqui";
+static const char* WIFI_PASSWORD = "Insira_a_senha_aqui";
 static const unsigned long WIFI_RETRY_INTERVAL_MS = 10000;
 
 // ============================================================
