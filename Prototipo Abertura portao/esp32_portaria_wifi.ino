@@ -34,8 +34,7 @@ static const unsigned long WIFI_RETRY_INTERVAL_MS = 10000;
 // Azure Storage (download de tags-autorizadas.json).
 // Preencher SAS de leitura em ambientes com container privado.
 // ============================================================
-static const char* TAGS_BLOB_URL =
-    "Insira_a_URL_do_blob_aqui";
+static const char* TAGS_BLOB_URL = "Insira_a_URL_do_blob_aqui";
 static const char* TAGS_BLOB_SAS_QUERY = "Insira_a_SAS_de_leitura_aqui";
 
 // ============================================================
