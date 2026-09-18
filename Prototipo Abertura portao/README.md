@@ -142,29 +142,6 @@ Este é o layout capturado para simulação Wokwi. Em hardware real o microSD é
 4. Informe o hostname, o identificador e a chave do dispositivo cadastrado no Azure IoT Hub.
 5. Não publique as credenciais reais em repositórios ou documentos.
 
-✅ **Compilar com Arduino CLI:**
-
-```powershell
-arduino-cli compile --fqbn esp32:esp32:esp32wrover esp32_wrover_wifi
-```
-
-✅ **Executar na placa física:**
-
-1. Monte o circuito conforme o arquivo [`diagram.json`](diagram.json).
-2. Insira um cartão microSD e conecte a ESP32-WROVER-KIT ao computador pela porta UART.
-3. Compile e envie o firmware para a porta COM atribuída à placa.
-4. Configure o monitor serial para **115200 bps**.
-5. Aproxime uma TAG e acompanhe a validação pelos LEDs, pelo buzzer e pelo monitor serial.
-
-✅ **Executar no Wokwi:**
-
-1. Abra a pasta `esp32_wrover_wifi` no Visual Studio Code.
-2. Instale a extensão Wokwi.
-3. Execute o comando **Wokwi: Start Simulator**.
-4. Utilize o cartão RFID virtual para gerar leituras.
-
-> **Observação:** a simulação do cartão microSD e o acesso aos serviços externos podem apresentar limitações no Wokwi. Na placa física, o slot embutido utiliza o periférico SDMMC.
-
 </details>
 
 ---
