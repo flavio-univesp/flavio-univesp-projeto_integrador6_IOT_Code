@@ -4,7 +4,7 @@
 
 <h3 align="center">📌 Projeto Integrador em Computação VI - 2026</h3>
 
-<p align="center"><strong>Polo:</strong> DRP04 - Trocar pelo nome dos polos</p>
+<p align="center"><strong>Polos:</strong> Araras-SP, Campinas-SP, Elias Fausto-SP, Estiva Gerbi-SP, Indaiatuba-SP, Leme-SP, Várzea Paulista-SP </p>
 <p align="center"><strong>Orientadora do PI:</strong> Aline Santana</p>
 
 ---
@@ -92,7 +92,26 @@ Fluxo de funcionamento:
 
 `TAG RFID → MFRC522 → ESP32-WROVER-KIT → Validação local → LEDs/Buzzer → microSD → Azure IoT Hub → Azure Storage → Container App → MySQL`
 
-Este é o layout capturado para simulação Wokwi. Em hardware real o microSD é embutido — o elemento externo do diagrama serve apenas para representar visualmente a mesma pinagem SDMMC (CLK=14, CMD=15, D0=2).
+### Pinos utilizados
+
+| Função | GPIO | Notas |
+|---|---|---|
+| RFID SS (SDA) | 5 | VSPI CS |
+| RFID SCK | 18 | VSPI CLK |
+| RFID MISO | 19 | VSPI MISO |
+| RFID MOSI | 23 | VSPI MOSI |
+| RFID RST | 21 | Reset do MFRC522 |
+| LED azul (Wi-Fi) | 32 | Aceso enquanto `WiFi.status() == WL_CONNECTED` |
+| LED verde (liberado) | 33 | Aceso por 10 s ao autorizar uma TAG |
+| LED vermelho (bloqueado) | 25 | Aceso por padrão, apaga durante os 10 s de liberação, pisca 3× junto com o buzzer no alerta de negação |
+| Buzzer passivo | 26 | LEDC canal automático, 2 kHz |
+| microSD CLK | 14 | Reservado ao periférico SDMMC do WROVER-KIT |
+| microSD CMD | 15 | Reservado ao periférico SDMMC |
+| microSD D0 | 2 | Reservado ao periférico SDMMC |
+
+Os pinos 4, 12 e 13 ficam livres — no modo 1-bit do SDMMC apenas 14/15/2 são usados. GPIOs 34-39 são somente entrada e podem ser aproveitados para sensores adicionais.
+
+### Diagrama de blocos (visual)
 
 ```
                                                      +---------+
