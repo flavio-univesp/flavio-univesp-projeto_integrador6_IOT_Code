@@ -1,10 +1,3 @@
-
-<p align="center"> <i>Desenvolvido com dedicação pelo grupo <strong>CondoAcessos</strong> — Projeto Integrador em Computação VI (UNIVESP, 2026)</i> </p> </div> ```
-
-
-
-
-
 <p align="center">
   <img src="https://user-images.githubusercontent.com/50468352/141820811-412e9364-7f5c-4889-826a-fcba23b92e23.png" width="350" alt="Logo do Projeto" />
 </p>
@@ -20,22 +13,20 @@
 
 | Nome                                | RA         |
 |-------------------------------------|------------|
-| Daniel Anunciato                    |  2222677   |
-| Eder Clauber dos Santos dos Anjos   |  1806662   |
-| Felipe Rafael Henriques             |  2214261   |
+| Daniel Anunciato                    | 2222677    |
+| Eder Clauber dos Santos dos Anjos   | 1806662    |
+| Felipe Rafael Henriques             | 2214261    |
 | Flavio Jorge de Medeiros            | 23205233   |
-| Francisco Ribeiro da Silva Junior   |  2108392   |
-| Kelven Joseph Machado Santos        |  2100626   |
-| Matheus Eduardo Peixoto de Carvalho |  2205301   |
-| Nicolly de Sousa Lima               |  2205907   |
-
-
+| Francisco Ribeiro da Silva Junior   | 2108392    |
+| Kelven Joseph Machado Santos        | 2100626    |
+| Matheus Eduardo Peixoto de Carvalho | 2205301    |
+| Nicolly de Sousa Lima               | 2205907    |
 
 ---
 
-## 💡 Projeto: *CondoAcessos* - Nome ainda necessia de definição
+## 💡 Projeto: *CondoAcesso — Leitor RFID com display LCD 1602*
 
-> **Sistema de controle de acessos com histórico para condomínios.**
+> **Protótipo educacional para leitura de TAGs RFID e exibição do UID em um display LCD 16x2.**
 
 ---
 
@@ -43,9 +34,9 @@
 <summary>⚠️ <strong>Sobre o desafio encontrado</strong></summary>
 <br/>
 
-🔍 Tivemos o desafio de solucionar as dificuldades de disponibilidade (sistema que nao esteja dependente de servidor físico) e ter um gerenciamento das informações de controle de acessos de moradores de forma centralizada, acessível e segura para condomínios.
+🔍 O desafio desta etapa foi validar a leitura de TAGs RFID e fornecer uma resposta visual imediata ao usuário sem depender de conexão Wi-Fi, servidor, nuvem ou armazenamento persistente.
 
-Nesse contexto, propusemos o desenvolvimento de uma plataforma web em nuvem, acessível por múltiplos dispositivos e com integração de banco de dados e a criação de um dispositivo IOT para verificação on-line de acesso, permitindo assim um gerenciamento de acesso seguro, com controles de registro de acessos por moradores.
+Para isso, foi necessário integrar o leitor **MFRC522**, que se comunica por SPI, e o display **LCD 1602**, controlado em modo paralelo de 4 bits, à placa **ESP32-WROVER-KIT V4.1**. A montagem também exigiu a definição correta dos GPIOs, alimentação em 3,3 V, compartilhamento do GND e ajuste de contraste do LCD por meio de um potenciômetro de 10 kΩ.
 
 </details>
 
@@ -55,16 +46,17 @@ Nesse contexto, propusemos o desenvolvimento de uma plataforma web em nuvem, ace
 <summary>🎯 <strong>Solução implementada</strong></summary>
 <br/>
 
-✅ Desenvolver um software com framework web em nuvem que utilize banco de dados, inclua script web (Javascript), nuvem (Microsoft Azure), uso de API, acessibilidade, controle de versão e testes. 
-Permitindo o acesso independente do lugar, pelos moradores quanto as funcionalidades de cadastro e consulta de prestadores; controle de documentação e da base de dados e de seus respectivos históricos e acesso por múltiplos dispositivos.
+✅ Desenvolvimento de um sketch para a **ESP32-WROVER-KIT** capaz de inicializar o leitor RFID MFRC522 e o display LCD 1602.
 
-✅ Desenvolver 2 IOT (um para identificação do TAG ID para cadastro com o Condomino e um para fazer o controle de acesso e a comunicação com a nuvem)
+✅ Exibição da mensagem `Aproxime a TAG / no leitor RFID` enquanto o dispositivo aguarda uma leitura.
 
-✅ A proposta contribui para a modernização da gestão condominial, reduzindo falhas de controler administrativos, adoção evitar o uso de produtos com alto custo e aumentando o controle por parte da administração dos acessos ao interior dos condomínios
+✅ Ao identificar uma TAG, o sistema apresenta o UID em hexadecimal no monitor serial e no LCD durante 3 segundos.
 
-<p align="center">
-<! --  <img src="projeto_integrador_1/vitrine.jpg" width="600" alt="Imagem da Vitrine Web">
-</p>
+✅ Após a exibição, o dispositivo retorna automaticamente à tela de espera e fica pronto para uma nova leitura.
+
+✅ Disponibilização de uma simulação no **Wokwi**, permitindo validar o circuito e o comportamento do protótipo antes da montagem física.
+
+Este protótipo não realiza autenticação, consulta a uma lista de permissões, persistência de dados ou comunicação com a nuvem. Seu objetivo é validar a leitura RFID e a interface visual que servirão de base para etapas posteriores do sistema de controle de acesso.
 
 </details>
 
@@ -74,36 +66,84 @@ Permitindo o acesso independente do lugar, pelos moradores quanto as funcionalid
 <summary>⚙️ <strong>Estrutura do projeto</strong></summary>
 <br/>
 
-O sistema foi estruturado no modelo **cliente-servidor em nuvem**, com interface web conectada a uma API REST e banco de dados hospedado na **plataforma Azure**.
+O protótipo foi estruturado com os seguintes componentes:
 
-Frontend (HTML, CSS, JS) → Backend (Node.js + Express) → Banco de Dados (MySQL no Azure) → Hospedagem e monitoramento (Azure App Service + Azure Monitor).
+- **ESP32-WROVER-KIT V4.1:** executa o firmware e coordena os periféricos;
+- **MFRC522:** realiza a leitura das TAGs RFID por meio do barramento SPI;
+- **LCD 1602 com controlador HD44780:** exibe as mensagens e o UID da TAG em modo paralelo de 4 bits;
+- **Potenciômetro de 10 kΩ:** ajusta o contraste do display;
+- **Monitor serial USB:** apresenta informações de diagnóstico e o UID lido a 115200 bps.
 
-Arduino como plataforma IOT de identificação da TAG ID para associação a cada condômino
+Fluxo de funcionamento:
 
-ESP32X como plataforma de leitura de TAG e comunicação com o APP em nuvem para liberação de acesso
+`TAG RFID → MFRC522 (SPI) → ESP32-WROVER-KIT → LCD 1602 + Monitor serial`
+
+### Pinos utilizados
+
+| Função | GPIO | Notas |
+|---|---|---|
+| RFID SS (SDA) | 5 | VSPI CS |
+| RFID SCK | 18 | VSPI CLK |
+| RFID MISO | 19 | VSPI MISO |
+| RFID MOSI | 23 | VSPI MOSI |
+| RFID RST | 21 | Reset do MFRC522 |
+| LCD RS | 32 | Register Select |
+| LCD E | 33 | Enable |
+| LCD D4 | 25 | Dado 4 |
+| LCD D5 | 26 | Dado 5 |
+| LCD D6 | 27 | Dado 6 |
+| LCD D7 | 14 | Dado 7 |
+| LCD RW | GND | Fixo em escrita — não é ligado ao ESP32 |
+| LCD V0 | Wiper do potenciômetro | Ajuste de contraste |
+| LCD A (backlight+) | 3.3V | Direto no barramento de alimentação |
+| LCD K (backlight-) | GND | Direto no barramento GND |
+| Alimentação (3.3V e GND) | trilhos + / − da protoboard | ESP32 → protoboard → RFID + LCD |
+
+O modo paralelo 4-bit envia cada byte em dois nibbles pelos pinos D4–D7. Isso reduz de 8 para 4 os fios de dado, deixando os pinos D0–D3 do LCD sem uso.
+
+### Diagrama de blocos e ligação
+
+```
+                     +--------------+
+                     |  MFRC522     |
+                     |  RFID Reader |
+                     +------+-------+
+                            |  SPI: SS=5, SCK=18, MISO=19, MOSI=23, RST=21
+                            |
+          +---(3V3)---------+-------+
+          |                         |
+   +------+-----+            +------+-------+
+   | ESP32      |----(D32)---| RS           |
+   | WROVER-KIT |----(D33)---| E            |
+   |            |----(D25)---| D4           |
+   |            |----(D26)---| D5           |   LCD 1602
+   |            |----(D27)---| D6           |   HD44780
+   |            |----(D14)---| D7           |   modo 4-bit
+   |            |            | RW ---(GND)  |
+   |            |            | V0 --[pot]-- (VCC/GND)
+   |            |            | A  ---(3V3)  |
+   |            |            | K  ---(GND)  |
+   +------+-----+            +--------------+
+          |
+        (GND)
+```
+
 
 </details>
 
 ---
 
 <details>
-<summary>🛠️ <strong>Como rodar o projeto localmente</strong></summary>
+<summary>🛠️ <strong>Como executar o projeto</strong></summary>
 <br/>
 
-✅ **Clonar o projeto para a máquina local:**  
- <code>git clone flavio-univesp/projeto_integrador6</code>
+✅ **Requisitos:**
 
-</br>
-
-✅ **Acesse o diretório do projeto:**  
-Navegue para o diretório do projeto clonado usando o comando:  
- <code>cd projeto_integrador6</code>
-
-</br>
-
-📄 O sistema está disponível no navegador em (disponível apenas no 2 semestre de 2026):
-
-👉 **A Definir**
+- Arduino CLI ou Arduino IDE;
+- Core `esp32:esp32@3.3.11`;
+- Biblioteca `MFRC522` 1.4.x;
+- Biblioteca `LiquidCrystal`;
+- Carregue o arquivo esp32_portaria_lcd.ino no dispositivo montado, através do Arduino IDE.
 
 </details>
 
@@ -112,11 +152,10 @@ Navegue para o diretório do projeto clonado usando o comando:
 ## 🧰 Tecnologias e ferramentas utilizadas
 
 <p>
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript Badge"/>
-  <img src ="https://img.shields.io/badge/microsoft%20azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white"/>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5 Badge"/>
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3 Badge"/>
+  <img src="https://img.shields.io/badge/ESP32-E7352C?style=for-the-badge&logo=espressif&logoColor=white" alt="ESP32 Badge"/>
+  <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" alt="C++ Badge"/>
+  <img src="https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Visual Studio Code Badge"/>
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge"/>
 </p>
 
-
+---
